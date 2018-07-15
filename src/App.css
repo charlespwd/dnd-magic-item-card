@@ -1,3 +1,7 @@
+html {
+  font-size: 0.5%;
+}
+
 .container {
   padding: 50px;
   display: flex;
@@ -24,12 +28,17 @@
   }
 }
 
-.fields input {
+.fields > * {
   position: relative;
   display: block;
   padding: 10px 0;
   margin: 10px;
   width: 100%;
+  font-size: 15px;
+}
+
+.fields textarea {
+  min-height: 200px;
 }
 
 .card {
@@ -43,6 +52,29 @@
   display: block;
 }
 
+.card__icon {
+  position: absolute;
+  top: 20.5%;
+  left: 24%;
+  transform: translate(-50%, 0);
+  width: 25%;
+}
+
+.card__icon:before {
+  padding-top: 80%;
+  display: block;
+  content: ' ';
+}
+
+.card__icon img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .card__img {
   width: 100%;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
@@ -51,8 +83,14 @@
   left: 0;
 }
 
-.card__title {
+.card > * {
+  position: absolute;
   font-family: 'Spectral SC', serif;
+  border: none;
+  background: transparent;
+}
+
+.card__title {
   position: absolute;
   top: 8.25%;
   left: 50%;
@@ -61,26 +99,98 @@
   transform: translate(-50%, 0);
   height: 6.5%;
   text-align: center;
-  border: none;
-  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.card__title p,
+.card__type p,
+.card__description p {
+  margin: 0;
+}
+
+.card__type {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  position: absolute;
+  top: 20.25%;
+  left: 45%;
+  width: 45.5%;
+  max-width: 81%;
+  height: 5.5%;
+  text-align: left;
   vertical-align: middle;
   line-height: 180%;
 }
 
-.card__type {
-  font-family: 'Spectral SC', serif;
+.card__description {
+  font-family: 'Crimson Text', serif !important;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 87%;
+  height: 45%;
+}
+
+.card__description p,
+.card__description ul {
+  padding-bottom: 0.5em;
+  margin: 0;
+}
+
+.card__description ul {
+  padding-left: 7%;
+}
+
+.card__value {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
   position: absolute;
-  top: 20.25%;
-  left: 45%;
-  width: 48%;
-  max-width: 81%;
-  height: 5.5%;
+  top: 29%;
+  left: 49%;
+  width: 11.5%;
+  height: 7.5%;
   text-align: left;
-  border: none;
-  background: transparent;
   vertical-align: middle;
   line-height: 180%;
+}
+
+.card__attunement {
+  width: 5%;
+  position: absolute;
+  top: 29%;
+  left: 57%;
+}
+
+.card__attunement {
+  width: 4.20%;
+  position: absolute;
+  top: 33.5%;
+}
+
+.card__attunement.false {
+  left: 87%;
+}
+
+.card__attunement.true {
+  left: 76.5%;
+}
+
+.card__attunement:before {
+  content: ' ';
+  display: block;
+  padding-top: 100%;
+  background-color: black;
 }
