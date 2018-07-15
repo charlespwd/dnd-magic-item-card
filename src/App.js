@@ -58,6 +58,22 @@ class App extends Component {
     })
   }
 
+  onImageChange = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+
   renderField(property, props={}) {
     return (
       <Textfit
@@ -85,6 +101,12 @@ class App extends Component {
             <input type="checkbox" checked={this.state.needsAttunement} onChange={this.onChangeNeedsAttunement} />
             Needs Attunement?
           </div>
+          <input
+            className="fileInput"
+            accept="image/png,image/jpeg"
+            type="file"
+            onChange={this.onImageChange}
+          />
           <button onClick={this.onSave}>
             Save
           </button>
@@ -92,7 +114,7 @@ class App extends Component {
         </div>
         <div className="card" ref={ref => { this.ref = ref; }}>
           <div className="card__icon">
-            <img src={staff} alt="icon" />
+            <img src={this.state.imagePreviewUrl || staff} alt="icon" />
           </div>
           <img src={logo} className="card__img" alt="card" />
           <div className={`card__attunement ${this.state.needsAttunement}`} />
