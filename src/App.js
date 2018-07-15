@@ -21,7 +21,7 @@ The staff regains 1d6+4 expended charges each day at dawn. If the last staffs ch
 
 class App extends Component {
   state = {
-    cardType: 'long',
+    cardType: 'default',
     title: '',
     type: '',
     description: '',
