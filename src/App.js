@@ -21,6 +21,7 @@ The staff regains 1d6+4 expended charges each day at dawn. If the last staffs ch
 
 class App extends Component {
   state = {
+    cardType: 'long',
     title: '',
     type: '',
     description: '',
@@ -35,6 +36,7 @@ class App extends Component {
     this.onChangeDescription = onChange('description').bind(this);
     this.onChangeValue = onChange('value').bind(this);
     this.onChangeNeedsAttunement = onChange('needsAttunement').bind(this);
+    this.onChangeCardType = onChange('cardType').bind(this);
   }
 
   componentDidMount() {
@@ -69,16 +71,37 @@ class App extends Component {
     reader.readAsDataURL(file)
   }
 
+  get cardTypeOptions() {
+    return [
+      'default',
+      'long',
+    ];
+  }
+
   render() {
+    const {
+      cardType,
+      description,
+      href,
+      needsAttunement,
+      title,
+      type,
+      value,
+    } = this.state;
     return (
       <div className="container">
         <div className="fields">
-          <input value={this.state.title} onChange={this.onChangeTitle} />
-          <input value={this.state.type} onChange={this.onChangeType} />
-          <input value={this.state.value} onChange={this.onChangeValue} />
-          <textarea value={this.state.description} onChange={this.onChangeDescription} />
+          <select value={cardType} onChange={this.onChangeCardType}>
+            {this.cardTypeOptions.map(option => (
+              <option value={option}>{option}</option>
+            ))}
+          </select>
+          <input value={title} onChange={this.onChangeTitle} />
+          <input value={type} onChange={this.onChangeType} />
+          <input value={value} onChange={this.onChangeValue} />
+          <textarea value={description} onChange={this.onChangeDescription} />
           <div>
-            <input type="checkbox" checked={this.state.needsAttunement} onChange={this.onChangeNeedsAttunement} />
+            <input type="checkbox" checked={needsAttunement} onChange={this.onChangeNeedsAttunement} />
             Needs Attunement?
           </div>
           <input
@@ -90,9 +113,9 @@ class App extends Component {
           <button onClick={this.onSave}>
             Save
           </button>
-          {this.state.href && <a download="image.png" href={this.state.href}>Download</a>}
+          {href && <a download="image.png" href={href}>Download</a>}
         </div>
-        <Card onRef={ref => this.ref = ref} {...this.state} />
+        <Card key={cardType} onRef={ref => this.ref = ref} {...this.state} />
       </div>
     );
   }

@@ -162,3 +162,52 @@
 .card--default .card__icon:before {
   padding-top: 79%;
 }
+
+/* long */
+.card--long .card__title {
+  top: 6.25%;
+  left: 50%;
+  width: 82%;
+  transform: translate(-50%, 0);
+  height: 6.5%;
+}
+
+.card--long .card__type {
+  top: 17.75%;
+  left: 9.0%;
+  width: 57.5%;
+  max-width: 81%;
+  height: 5.0%;
+}
+
+.card--long .card__description {
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 87%;
+  height: 61.75%;
+}
+
+.card--long .card__value {
+  display: none;
+}
+
+.card--long .card__attunement {
+  top: 19.3%;
+}
+
+.card--long .card__attunement.false {
+  left: 89%;
+}
+
+.card--long .card__attunement.true {
+  left: 78.5%;
+}
+
+.card--long .card__icon {
+  display: none;
+}
+
+.card--long .card__icon:before {
+  padding-top: 79%;
+}
