@@ -1,0 +1,164 @@
+.card {
+  width: 6.35cm;
+  position: relative;
+}
+
+.card:before {
+  padding-top: 140%;
+  content: ' ';
+  display: block;
+}
+
+.card__icon {
+  position: absolute;
+}
+
+.card__icon:before {
+  display: block;
+  content: ' ';
+}
+
+.card__icon img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card__img {
+  width: 100%;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card > * {
+  position: absolute;
+  font-family: 'Spectral SC', serif;
+  border: none;
+  background: transparent;
+
+  /* outline: 3px solid rgba(0, 256, 0, 0.3); */
+}
+
+.card__title {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.card__title p,
+.card__type p,
+.card__description p {
+  margin: 0;
+}
+
+.card__type {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.card__description {
+  font-family: 'Crimson Text', serif !important;
+}
+
+.card__description p,
+.card__description ul {
+  padding-bottom: 0.5em;
+  margin: 0;
+}
+
+.card__description ul {
+  padding-left: 7%;
+}
+
+.card__value {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.card__attunement {
+  width: 4.20%;
+}
+
+.card__attunement:before {
+  content: ' ';
+  display: block;
+  padding-top: 100%;
+  background-color: black;
+}
+
+/* default */
+.card--default .card__title {
+  top: 6.25%;
+  left: 50%;
+  width: 82%;
+  transform: translate(-50%, 0);
+  height: 6.5%;
+}
+
+.card--default .card__type {
+  top: 18.45%;
+  left: 46.5%;
+  width: 45.5%;
+  max-width: 81%;
+  height: 5.5%;
+}
+
+.card--default .card__description {
+  top: 41%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 87%;
+  height: 45.75%;
+}
+
+.card--default .card__value {
+  top: 27.35%;
+  left: 49%;
+  width: 12.25%;
+  height: 7.5%;
+}
+
+.card--default .card__attunement {
+  top: 31.5%;
+}
+
+.card--default .card__attunement.false {
+  left: 88%;
+}
+
+.card--default .card__attunement.true {
+  left: 77.5%;
+}
+
+.card--default .card__icon {
+  position: absolute;
+  top: 19%;
+  left: 23.5%;
+  transform: translate(-50%, 0);
+  width: 25.5%;
+}
+
+.card--default .card__icon:before {
+  padding-top: 79%;
+}

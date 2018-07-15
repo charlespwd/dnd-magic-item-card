@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import Textfit from './textfit';
-import ReactMarkdown from 'react-markdown';
 import html2canvas from 'html2canvas';
+import Card from './Card';
 import './App.css';
-
-import staff from './assets/staff.jpeg';
-import logo from './assets/magic-item.png';
 
 const onChange = property => function({ target }) {
   const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -73,22 +69,6 @@ class App extends Component {
     reader.readAsDataURL(file)
   }
 
-
-  renderField(property, props={}) {
-    return (
-      <Textfit
-        className={`card__${property}`}
-        autoResize
-        max={1500}
-        forceSingleModeWidth={false}
-        mode='single'
-        { ...props }
-      >
-        <ReactMarkdown source={this.state[property]} />
-      </Textfit>
-    )
-  }
-
   render() {
     return (
       <div className="container">
@@ -112,23 +92,7 @@ class App extends Component {
           </button>
           {this.state.href && <a download="image.png" href={this.state.href}>Download</a>}
         </div>
-        <div className="card" ref={ref => { this.ref = ref; }}>
-          <div className="card__icon">
-            <img src={this.state.imagePreviewUrl || staff} alt="icon" />
-          </div>
-          <img src={logo} className="card__img" alt="card" />
-          <div className={`card__attunement ${this.state.needsAttunement}`} />
-          {this.renderField('title')}
-          {this.renderField('type')}
-          {this.renderField('value', {
-            forceSingleModeWidth: true,
-            max: 241,
-          })}
-          {this.renderField('description', {
-            mode: 'multi',
-            max: 140,
-          })}
-        </div>
+        <Card onRef={ref => this.ref = ref} {...this.state} />
       </div>
     );
   }
