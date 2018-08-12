@@ -2,6 +2,10 @@ html {
   font-size: 0.5%;
 }
 
+.download-cards {
+  font-size: 15px;
+}
+
 .container {
   padding: 50px;
   display: flex;

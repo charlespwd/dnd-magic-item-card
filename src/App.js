@@ -180,7 +180,7 @@ class App extends Component {
       <Fragment>
         <button className="print-mode" onClick={this.onClick}>Print Mode</button>
         {printMode && <button className="download-all" onClick={this.onSave}>Create Image</button>}
-        {href && <a download="cards.png" href={href}>Download Image</a>}
+        {href && <a className="download-cards" download="cards.png" href={href}>Download Image</a>}
         <div className={classes} ref={ref => this.ref = ref}>
           {R.range(0, 9).map(i => (
             <CardEditor key={i} localStorageKey={`card${i}`} />
