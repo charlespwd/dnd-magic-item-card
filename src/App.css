@@ -12,6 +12,35 @@ html {
   flex-wrap: nowrap;
 }
 
+.app-container--print .container .fields {
+  display: none;
+}
+
+.app-container--print {
+  display: grid;
+  grid-template-columns: 2.5in 2.5in 2.5in;
+  grid-template-rows: 3.5in 3.5in 3.5in;
+  grid-gap: 0.125in 0.25in;
+  padding: 0.125in 0.25in;
+  width: 8in;
+  max-width: 8.5in;
+  height: 10.75in;
+}
+
+.app-container--print .container {
+  padding: 0;
+}
+
+@media print {
+  .print-mode {
+    display: none;
+  }
+}
+
+.app-container--print .container {
+  display: block;
+}
+
 .fields {
   width: 50%;
   display: flex;
@@ -35,6 +64,16 @@ html {
   margin: 10px;
   width: 100%;
   font-size: 15px;
+}
+
+.fields .buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+}
+
+.fields .buttons button {
+  padding: 10px 0;
 }
 
 .fields textarea {

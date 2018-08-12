@@ -1,25 +1,50 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import * as R from 'ramda';
 import html2canvas from 'html2canvas';
 import Card from './Card';
 import './App.css';
+import debounce from 'lodash.debounce';
+import classnames from 'classnames';
 
 const onChange = property => function({ target }) {
   const value = target.type === 'checkbox' ? target.checked : target.value;
 
   this.setState({
     [property]: value,
-  });
+  }, this.saveState);
 }
 
-const defaultDesc = `Holding this staff grants a +1 bonus to armor class.
+const localStorage = window.localStorage;
 
-The staff contains 10 charges used to fuel the spells within it. While holding the staff, it can be used to cast one of the following spells if the spell is on your class’s spell list:
-- Mage Armor (1 charge)
-- Shield (2 charges)
+const defaultTitle = 'Circlet of Blasting'
 
-The staff regains 1d6+4 expended charges each day at dawn. If the last staffs charge is expended, roll a d20. On a 1, the staff shatters and is destroyed.`
+const defaultDesc = `While wearing this circlet, you can use an action to cast the Scorching Ray spell with it. When you make the spell's attacks, you do so with an **Attack bonus of +5**. The circlet can't be used this way again until the next dawn.`
 
-class App extends Component {
+const defaultState = {
+  cartType: 'default',
+  description: defaultDesc,
+  needsAttunement: false,
+  title: 'Gauntlet of Thunderblasting',
+  type: 'Uncommon',
+  imagePreviewUrl: undefined,
+  value: '100',
+};
+
+const saveData = debounce((key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+}, 500);
+
+const getSavedDate = (key) => {
+  const data = localStorage.getItem(key);
+  if (!data) return undefined;
+  return JSON.parse(data);
+}
+
+class CardEditor extends Component {
+  static defaultProps = {
+    localStorageKey: 'card',
+  }
+
   state = {
     cardType: 'default',
     title: '',
@@ -40,13 +65,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      title: 'Gauntlet of Thunderblasting',
-      type: 'Uncommon',
-      description: defaultDesc,
-      value: '100',
-    });
+    const cachedState = getSavedDate(this.props.localStorageKey);
+    this.setState(cachedState || defaultState);
     setTimeout(() => this.forceUpdate(), 100);
+  }
+
+  saveState = () => {
+    saveData(this.props.localStorageKey, this.state);
+  }
+
+  onReset = () => {
+    this.setState(defaultState, this.saveState);
   }
 
   onSave = () => {
@@ -65,7 +94,7 @@ class App extends Component {
     reader.onloadend = () => {
       this.setState({
         imagePreviewUrl: reader.result
-      });
+      }, this.saveState);
     }
 
     reader.readAsDataURL(file)
@@ -110,13 +139,44 @@ class App extends Component {
             type="file"
             onChange={this.onImageChange}
           />
-          <button onClick={this.onSave}>
-            Save
-          </button>
+          <div className="buttons">
+            <button onClick={this.onReset}>
+              Reset
+            </button>
+            <button onClick={this.onSave}>
+              Save
+            </button>
+          </div>
           {href && <a download="image.png" href={href}>Download</a>}
         </div>
         <Card key={cardType} onRef={ref => this.ref = ref} {...this.state} />
       </div>
+    );
+  }
+}
+
+class App extends Component {
+  state = {
+    printMode: false,
+  }
+
+  onClick = () => this.setState({ printMode: !this.state.printMode });
+
+  render() {
+    const classes = classnames({
+      'app-container--print': this.state.printMode,
+      'app-container': true,
+    });
+
+    return (
+      <Fragment>
+        <button className="print-mode" onClick={this.onClick}>Print Mode</button>
+        <div className={classes}>
+          {R.range(0, 9).map(i => (
+            <CardEditor key={i} localStorageKey={`card${i}`} />
+          ))}
+        </div>
+      </Fragment>
     );
   }
 }

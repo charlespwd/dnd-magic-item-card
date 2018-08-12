@@ -5,6 +5,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "html2canvas": "^1.0.0-alpha.12",
+    "lodash.debounce": "^4.0.8",
+    "ramda": "^0.25.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-markdown": "^3.3.4",
