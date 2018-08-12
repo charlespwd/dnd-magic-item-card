@@ -24,11 +24,15 @@ html {
   display: grid;
   grid-template-columns: 2.5in 2.5in 2.5in;
   grid-template-rows: 3.5in 3.5in 3.5in;
-  grid-gap: 0.125in 0.25in;
-  padding: 0.125in 0.25in;
-  width: 8in;
-  max-width: 8.5in;
-  height: 10.75in;
+  grid-gap: 0.05in;
+
+  padding-top: 0.2in;
+  padding-bottom: 0.2in;
+  height: 10.6in;
+
+  padding-left: 0.45in;
+  padding-right: 0.45in;
+  width: 7.6in;
 }
 
 .app-container--print .container {
