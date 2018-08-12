@@ -162,7 +162,15 @@ class App extends Component {
 
   onClick = () => this.setState({ printMode: !this.state.printMode });
 
+  onSave = () => {
+    html2canvas(this.ref).then(canvas => {
+      const href = canvas.toDataURL("image/png");
+      this.setState({ href });
+    })
+  }
+
   render() {
+    const { href, printMode } = this.state;
     const classes = classnames({
       'app-container--print': this.state.printMode,
       'app-container': true,
@@ -171,7 +179,9 @@ class App extends Component {
     return (
       <Fragment>
         <button className="print-mode" onClick={this.onClick}>Print Mode</button>
-        <div className={classes}>
+        {printMode && <button className="download-all" onClick={this.onSave}>Create Image</button>}
+        {href && <a download="cards.png" href={href}>Download Image</a>}
+        <div className={classes} ref={ref => this.ref = ref}>
           {R.range(0, 9).map(i => (
             <CardEditor key={i} localStorageKey={`card${i}`} />
           ))}

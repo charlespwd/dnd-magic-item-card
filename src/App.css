@@ -29,6 +29,18 @@ html {
 
 .app-container--print .container {
   padding: 0;
+  background-color: white;
+  position: relative;
+}
+
+.app-container--print .container::before {
+  content: ' ';
+  width: calc(100% + 1mm);
+  height: calc(100% + 1mm);
+  background-color: rgba(0, 0, 0, 0.08);
+  position: absolute;
+  top: -0.5mm;
+  left: -0.5mm;
 }
 
 @media print {
